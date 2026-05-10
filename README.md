@@ -1,5 +1,6 @@
+<<<<<<< HEAD
 # job-tracker-frontend
-
+Vue frontend für Webtechn Job-Tracker
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
@@ -52,3 +53,7 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+=======
+# Job-Tracker-Frontend
+Webtechnologien Projekt Frontend Repo
+>>>>>>> e44af58ce5b091950d71d880f591ecad7a599d23
