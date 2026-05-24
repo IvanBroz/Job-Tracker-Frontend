@@ -1,16 +1,27 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const applications = ref([])
+type Application = {
+  id: number
+  company: string
+  position: string
+  status: string
+}
+
+const applications = ref<Application[]>([])
 
 const baseUrl = import.meta.env.VITE_API_URL
 
-onMounted(() => {
+function loadApplications() {
   fetch(`${baseUrl}/applications`)
     .then(response => response.json())
     .then(data => {
       applications.value = data
     })
+}
+
+onMounted(() => {
+  loadApplications()
 })
 </script>
 
