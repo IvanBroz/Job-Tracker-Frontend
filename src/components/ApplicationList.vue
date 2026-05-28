@@ -26,7 +26,51 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-for="application in applications" :key="application.id">
-    {{ application }}
-  </div>
+  <table>
+
+    <tr>
+      <th>Position</th>
+      <th>Company</th>
+      <th>Job ID</th>
+      <th>Page</th>
+      <th>Date</th>
+      <th>Status</th>
+    </tr>
+
+    <tr v-for="application in applications" :key="application.id">
+      <td>{{ application.position }}</td>
+      <td>{{ application.company }}</td>
+      <td>{{ application.id }}</td>
+      <td>LinkedIn</td>
+      <td>24.05.2026</td>
+      <td>
+
+        <select v-model="application.status">
+
+          <option>Pending</option>
+
+          <option>Interview Round 1</option>
+
+          <option>Rejected</option>
+
+        </select>
+
+      </td>
+    </tr>
+
+  </table>
 </template>
+<style scoped>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 8px;
+}
+select {
+
+  cursor: pointer;
+
+  padding: 4px;
+
+}
+</style>
