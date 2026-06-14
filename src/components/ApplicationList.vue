@@ -54,12 +54,16 @@ function addApplication() {
     })
 }
 
-function statusClass(status: string) {
-  if (status === 'Abgelehnt') {
-    return 'rejected'
-  }
+function deleteApplication(id: number) {
+  fetch(`${baseUrl}/applications/${id}`, {
+    method: 'DELETE',
+  }).then(() => {
+    loadApplications()
+  })
+}
 
-  return ''
+function statusClass(status: string) {
+  return status === 'Abgelehnt' ? 'rejected' : ''
 }
 
 onMounted(() => {
@@ -104,7 +108,7 @@ onMounted(() => {
     <tr>
       <th>Jobbezeichnung</th>
       <th>Unternehmen</th>
-      <th>Link zur Stellenausschreibung</th>
+      <th>Stellenausschreibung</th>
       <th>Datum</th>
       <th>Status</th>
     </tr>
@@ -122,13 +126,13 @@ onMounted(() => {
           :href="application.jobLink"
           target="_blank"
         >
-          Stellenausschreibung
+          Öffnen
         </a>
       </td>
 
       <td>{{ application.applicationDate }}</td>
 
-      <td>
+      <td class="status-cell">
         <select
           v-model="application.status"
           :class="statusClass(application.status)"
@@ -137,6 +141,13 @@ onMounted(() => {
           <option>Interview 1</option>
           <option>Abgelehnt</option>
         </select>
+
+        <button
+          class="delete-button"
+          @click="deleteApplication(application.id)"
+        >
+          ✕
+        </button>
       </td>
     </tr>
   </table>
@@ -160,7 +171,7 @@ table,
 th,
 td {
   border: 1px solid black;
-  padding: 10px;
+  padding: 8px;
   text-align: center;
 }
 
@@ -170,14 +181,30 @@ button {
   padding: 6px;
 }
 
-button {
-  cursor: pointer;
+.status-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .rejected {
   background-color: red;
   color: white;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 18px;
   font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+}
+
+.delete-button:hover {
+  transform: scale(1.2);
 }
 
 a {
